@@ -1,3 +1,9 @@
+import json
+import csv
+import os
+
+
+
 def year_namer(age):
     str_age = str(age)
     end_num = int(str_age[len(str_age)-1])
@@ -145,9 +151,35 @@ while True:
 for thing in things:
     print(thing)
 
+haracteristica_person = [{"Имя":name, "Возраст":age, "Пол":gender}]
+
+if os.path.exists('data.json'):
+   with open('data.json', 'r') as file:
+      data = json.load(file)
+      data["haracteristica_person"].append((haracteristica_person))
+
+else:
+    data = {"haracteristica_person": []}
+    data["haracteristica_person"].append((haracteristica_person))
+
+with open('data.json', 'w') as file:
+    json.dump(data, file)
+
+with open('output.csv', 'a', newline='', encoding='cp1251') as file:
+   fieldnames = ['Возраст', 'Пол', 'Имя']
+   writer = csv.DictWriter(file, fieldnames=fieldnames, delimiter=';')
+   writer.writeheader()
+   writer.writerows(haracteristica_person)
 
 
+print("Хотите удалить сохранения?")
+print("1. Да")
+print("2. Нет")
 
-
-
-
+vibor2 = input()
+if int(vibor2) == 1:
+    print("Вы удалили сохранение")
+    os.remove("C:\\Users\\eliza\\PycharmProjects\\pythonProject4\\output.csv")
+    os.remove("C:\\Users\\eliza\\PycharmProjects\\pythonProject4\\data.json")
+else:
+    pass
