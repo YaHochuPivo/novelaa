@@ -2,8 +2,29 @@ import json
 import csv
 import os
 
+def sohra():
+    print("Хотите удалить сохранения?")
+    print("1. Да")
+    print("2. Нет")
+def privet():
+    print("Привет! это текстовая новелла")
 
-
+def menu():
+    global choice
+    print("""
+    1. Начало истории
+    2. Конец игры
+    """)
+    while choice != 3:
+        choice = input("Выберите номер пункта: ")
+        if choice == "1":
+            print("Вы выбрали историю!")
+            break
+        elif choice == "2":
+            print("Конец игры!")
+            exit()
+        else:
+            print("Некорректный ввод!")
 def year_namer(age):
     str_age = str(age)
     end_num = int(str_age[len(str_age)-1])
@@ -22,31 +43,17 @@ def verb_choicer():
         return verbs_female[verbs_num]
 things = []
 
-print("Привет! Это консольная новелла!")
+privet()
 
 choice = None
-
-print("""
-1. Начало истории
-2. Конец игры
-""")
-while choice != 3:
-    choice = input("Выберите номер пункта: ")
-    if choice == "1":
-        print("Вы выбрали историю!")
-        break
-    elif choice == "2":
-        print("Конец игры!")
-        exit()
-    else:
-        print("Некорректный ввод!")
+menu()
 name = input("Введите ваше имя: ")
 age = int(input("Введите ваш возраст: "))
 gender = input("Введите ваш пол(муж/жен): ")
 verbs_num = -1
 verbs_male = [" не заметил","подумал", "направился", "приехал", "подумал", "обернулся", "обратил", "подумал", "слышал", "прошептал","взял","набрал","подошёл", "Сам","просунул", "заслонял", "достал"]
 verbs_female = [" не заметила", "подумала", "направилась", "приехала", "подумала", "обернулась","обратила", "подумала", "слышала","прошептала","взяла","набрала","подошла","Сама","просунула", "заслоняла", "достала"]
-output = f"Ваше имя: {name}. Возраст: {age}. Пол: {gender}. Начинаем...."
+output = f"Ваше имя: {name}. Возраст: {age} {year_namer(age)}. Пол: {gender}. Начинаем...."
 print(output)
 print("❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆❆")
 print("Глава 1. Первый снег.")
@@ -172,9 +179,7 @@ with open('output.csv', 'a', newline='', encoding='cp1251') as file:
    writer.writerows(haracteristica_person)
 
 
-print("Хотите удалить сохранения?")
-print("1. Да")
-print("2. Нет")
+sohra()
 
 vibor2 = input()
 if int(vibor2) == 1:
